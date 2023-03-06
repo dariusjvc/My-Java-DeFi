@@ -4,11 +4,9 @@
 
 There are 3 smart contacts:
 
-MainToken
-RewardToken
-StakingToken
+MainToken, RewardToken and StakingToken
 
-1. With StakingToken the admin will be in charge of creating the tokens that will then be sent to the user
+1. The admin will create tokens (StakingTokes), which will then send them to the user
 2. The user will delegate to the MainToken the permission so that he can stake his tokens
 3. The user will stake
 4. The admin will issue some RewardToken to the user, which will be the reward for staking
