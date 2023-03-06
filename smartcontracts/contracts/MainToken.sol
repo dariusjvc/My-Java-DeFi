@@ -28,16 +28,13 @@ contract MainToken {
     if (!hasStaked[msg.sender]){
         stakers.push(msg.sender);
     }
-
     isStaking[msg.sender] = true;
     hasStaked[msg.sender] = true;
-
     }
 
 
     function unstakeTokens() public
     {
-
         uint balance = stakingBalance[msg.sender];
         require(balance>0, "The balance must be more tha 0");
 
@@ -56,9 +53,6 @@ contract MainToken {
             if(balance>0){
                 rewardToken.transfer(recipient, balance);
             }
-
-
-
         }
     }
 
