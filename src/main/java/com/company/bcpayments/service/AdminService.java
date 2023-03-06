@@ -1,9 +1,12 @@
 package com.company.bcpayments.service;
 
 import com.company.bcpayments.repository.EthereumManagement;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Service
 @Primary
@@ -52,4 +55,12 @@ public class AdminService {
             throw new RuntimeException(e);
         }
     }
+
+
+    public String sendTokens(){
+        //TODO
+        return "123";
+    }
+
+
 }

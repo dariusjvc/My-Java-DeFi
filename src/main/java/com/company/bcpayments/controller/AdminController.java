@@ -33,4 +33,12 @@ public class AdminController {
     }
 
 
+    @PostMapping("/sendTokens")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public String sendTokens() {
+        adminService.sendTokens();
+        return "Joseph";
+    }
+
+
 }
