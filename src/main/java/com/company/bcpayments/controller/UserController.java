@@ -27,6 +27,7 @@ public class UserController {
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public String approveStaking() {
 
-        return userService.approveStaking();
+        //return userService.approveStaking();
+        return "testApprove";
     }
 }

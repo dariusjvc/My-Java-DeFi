@@ -55,4 +55,8 @@ contract RewardToken  {
         emit Transfer(_from, _to, _value);
         return true;
     }
+
+    function getTotalMinted() public view returns (uint256) {
+        return totalSupply;
+    }
 }

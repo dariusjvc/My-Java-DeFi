@@ -5,7 +5,7 @@ dependencies-web3j:
 
 wrapper-smart-contract:
 	./web3j-1.4.1/bin/web3j generate solidity \
-	-a=abis/UpgradableTokenTest.abi \
-	-b=abis/UpgradableTokenTest.bin \
+	-a=abis/StakingToken.abi \
+	-b=abis/StakingToken.bin \
 	-o ./src/main/java/ \
 	-p com.company.bcpayments.wrapper
