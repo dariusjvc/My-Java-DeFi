@@ -6,24 +6,24 @@ async function main() {
   const unlockTime = currentTimestampInSeconds + 60;
 
   console.log("Deploying StakingToken with the account:", deployer.address);
-  const StakingToken = await hre.ethers.getContractFactory("StakingToken");
+  const StakingToken = await ethers.getContractFactory("StakingToken");
   const stakingToken = await StakingToken.deploy();
-  await stakingToken.deployed();
+  //await stakingToken.deployed();
     console.log(
       `StakingToken deployed to: ${stakingToken.address}`
     );
   console.log("Deploying RewardToken with the account:", deployer.address);
-  const RewardToken = await hre.ethers.getContractFactory("RewardToken");
+  const RewardToken = await ethers.getContractFactory("RewardToken");
   const rewardToken = await RewardToken.deploy();
-  await rewardToken.deployed();
+  //await rewardToken.deployed();
     console.log(
       `StakingToken deployed to: ${rewardToken.address}`
     );
 
   console.log("Deploying MainToken with the account:", deployer.address);
-  const MainToken = await hre.ethers.getContractFactory("MainToken");
+  const MainToken = await ethers.getContractFactory("MainToken");
   const mainToken = await MainToken.deploy(rewardToken.address,stakingToken.address);
-  await mainToken.deployed();
+  //await mainToken.deployed();
     console.log(
       `MainToken deployed to: ${mainToken.address}`
     );

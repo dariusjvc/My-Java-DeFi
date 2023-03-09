@@ -19,7 +19,7 @@ public class AdminService {
     }
 
     public String name(){
-        String name;
+        String name ;
 
         try{
             name = bck.getName();
@@ -43,7 +43,7 @@ public class AdminService {
 
         try{
             //Recibo y el resultado y lo envuelvo en la respuesta
-            total = bck.getTotalTokens();
+            total = String.valueOf(bck.getTotalTokens());
 
             return total;
 

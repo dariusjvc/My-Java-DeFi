@@ -1,6 +1,6 @@
 package com.company.bcpayments.repository;
 
-import com.company.bcpayments.wrapper.UpgradableTokenTest;
+import com.company.bcpayments.wrapper.StakingToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
@@ -35,23 +35,24 @@ public class EthereumManagement {
     public String getName() throws NullPointerException, ResponseStatusException, Exception{
         String contractAddress = getContractAddress();
         Credentials credentials = getOwnerCredentials();
-        UpgradableTokenTest token = loadTokenContract(contractAddress, credentials);
+        //StakingToken token = loadTokenContract(contractAddress, credentials);
+        StakingToken token = loadTokenContract(contractAddress, credentials);
 
         String tokenName = token.name().send();
         log.info("The token name is: " + tokenName);
         return tokenName;
     }
 
-    public String getTotalTokens() throws NullPointerException, ResponseStatusException, Exception{
+    public BigInteger getTotalTokens() throws NullPointerException, ResponseStatusException, Exception{
         //Cargo el contrato a partir de la direccion y la firma
         String contractAddress = getContractAddress();
         Credentials credentials = getOwnerCredentials();
-        UpgradableTokenTest token = loadTokenContract(contractAddress, credentials);
+        StakingToken token = loadTokenContract(contractAddress, credentials);
 
         BigInteger balance = token.getTotalMinted().send();
-        String totalTokens = String.valueOf(balance.doubleValue() / Math.pow(10, token.decimals().send().doubleValue()));
-        log.info("Total minted: " + totalTokens);
-        return totalTokens;
+        String totalTokens = String.valueOf(balance.doubleValue() / Math.pow(10, 100000000));
+        log.info("Total minted: " + balance);
+        return balance;
     }
 
     @NotNull
@@ -87,8 +88,8 @@ public class EthereumManagement {
     }
 
     @NotNull
-    private UpgradableTokenTest loadTokenContract(String contractAddress, Credentials credentials) {
-        return UpgradableTokenTest.load(
+    private StakingToken loadTokenContract(String contractAddress, Credentials credentials) {
+        return StakingToken.load(
                 contractAddress,
                 ethereumClient,
                 new FastRawTransactionManager(ethereumClient, credentials, new PollingTransactionReceiptProcessor(ethereumClient, 100, 400)),
