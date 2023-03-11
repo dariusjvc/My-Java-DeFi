@@ -5,8 +5,8 @@ contract StakingToken  {
 
     string public name = "StakingToken";
     string public symbol= "ST";
-    uint256 public totalSupply = 10000000000000000000000;
-    uint8 decimals = 18;
+    uint256 public totalSupply = 100000;
+    uint8 decimals = 2;
 
     event Transfer(
     address indexed _from,
@@ -56,7 +56,4 @@ contract StakingToken  {
         return true;
     }
 
-    function getTotalMinted() public view returns (uint256) {
-        return totalSupply;
-    }
 }

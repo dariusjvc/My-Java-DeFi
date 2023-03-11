@@ -1,28 +1,26 @@
 package com.company.bcpayments.service;
 
-import com.company.bcpayments.repository.EthereumManagement;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import com.company.bcpayments.repository.StakingTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 @Service
 @Primary
 @Slf4j
 public class AdminService {
-    private final EthereumManagement bck;
+    private final StakingTokenRepository StakingToken;
 
-    public AdminService(EthereumManagement bck) {
-        this.bck = bck;
+    public AdminService(StakingTokenRepository bck) {
+        this.StakingToken = bck;
     }
 
     public String name(){
         String name ;
 
         try{
-            name = bck.getName();
+            name = StakingToken.getName();
 
             return name;
 
@@ -33,7 +31,7 @@ public class AdminService {
         }
     }
 
-    public String totalTokens(){
+    /*public String totalTokens(){
 
 
         //Comprueba los permisos
@@ -43,7 +41,7 @@ public class AdminService {
 
         try{
             //Recibo y el resultado y lo envuelvo en la respuesta
-            total = String.valueOf(bck.getTotalTokens());
+            total = String.valueOf(StakingToken.getTotalTokens());
 
             return total;
 
@@ -54,12 +52,11 @@ public class AdminService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 
-    public String sendTokens(){
-        //TODO
-        return "123";
+    public TransactionReceipt transferTokens(double value) throws Exception {
+        return StakingToken.transferTokens(value);
     }
 
 

@@ -17,7 +17,7 @@ async function main() {
   const rewardToken = await RewardToken.deploy();
   //await rewardToken.deployed();
     console.log(
-      `StakingToken deployed to: ${rewardToken.address}`
+      `RewardToken deployed to: ${rewardToken.address}`
     );
 
   console.log("Deploying MainToken with the account:", deployer.address);

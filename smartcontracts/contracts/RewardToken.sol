@@ -5,8 +5,8 @@ contract RewardToken  {
 
     string public name = "RewardToken";
     string public symbol= "RT";
-    uint256 public totalSupply = 10000000000000000000000;
-    uint8 decimals = 18;
+    uint256 public totalSupply = 100000;
+    uint8 decimals = 2;
 
     event Transfer(
     address indexed _from,

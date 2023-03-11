@@ -22,7 +22,7 @@ import java.math.BigInteger;
 @Repository
 @Slf4j
 @RequiredArgsConstructor
-public class EthereumManagement {
+public class MainTokenRepository {
 
     private final Web3j ethereumClient;
 
@@ -43,7 +43,7 @@ public class EthereumManagement {
         return tokenName;
     }
 
-    public BigInteger getTotalTokens() throws NullPointerException, ResponseStatusException, Exception{
+    /*public BigInteger getTotalTokens() throws NullPointerException, ResponseStatusException, Exception{
         //Cargo el contrato a partir de la direccion y la firma
         String contractAddress = getContractAddress();
         Credentials credentials = getOwnerCredentials();
@@ -53,7 +53,7 @@ public class EthereumManagement {
         String totalTokens = String.valueOf(balance.doubleValue() / Math.pow(10, 100000000));
         log.info("Total minted: " + balance);
         return balance;
-    }
+    }*/
 
     @NotNull
     private  String getContractAddress() throws NullPointerException {
@@ -61,7 +61,7 @@ public class EthereumManagement {
         String contractAddress = environment.getProperty("contract.address","");
 
         if (contractAddress.isEmpty()) {
-            EthereumManagement.log.error("Contract address is not valid");
+            MainTokenRepository.log.error("Contract address is not valid");
             throw new NullPointerException();
         }
         return contractAddress;
@@ -77,11 +77,11 @@ public class EthereumManagement {
             credentials = WalletUtils.loadCredentials(password, keyPath);
 
         } catch (IOException e) {
-            EthereumManagement.log.error("Can't load path {}", keyPath);
+            MainTokenRepository.log.error("Can't load path {}", keyPath);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 
         } catch (CipherException e) {
-            EthereumManagement.log.error("Can't decode key", e);
+            MainTokenRepository.log.error("Can't decode key", e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return credentials;
