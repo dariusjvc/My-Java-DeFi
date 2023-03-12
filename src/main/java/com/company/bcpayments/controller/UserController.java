@@ -28,4 +28,12 @@ public class UserController {
 
         return userService.approveStaking( value);
     }
+
+    @PostMapping("/stakeTokens")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public TransactionReceipt stakeTokens(@ApiParam(value = " Id del usuario ",  required = true)
+                                             @RequestParam double value) throws Exception {
+
+        return userService.stakeTokens( value);
+    }
 }

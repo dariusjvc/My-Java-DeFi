@@ -1,5 +1,6 @@
 package com.company.bcpayments.repository;
 
+import com.company.bcpayments.wrapper.MainToken;
 import com.company.bcpayments.wrapper.StakingToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tx.FastRawTransactionManager;
 import org.web3j.tx.gas.StaticGasProvider;
 import org.web3j.tx.response.PollingTransactionReceiptProcessor;
@@ -32,16 +34,7 @@ public class MainTokenRepository {
     private static final String PREFIX_ZERO = "0x000000000000000000000000";
 
 
-    public String getName() throws NullPointerException, ResponseStatusException, Exception{
-        String contractAddress = getContractAddress();
-        Credentials credentials = getOwnerCredentials();
-        //StakingToken token = loadTokenContract(contractAddress, credentials);
-        StakingToken token = loadTokenContract(contractAddress, credentials);
 
-        String tokenName = token.name().send();
-        log.info("The token name is: " + tokenName);
-        return tokenName;
-    }
 
     /*public BigInteger getTotalTokens() throws NullPointerException, ResponseStatusException, Exception{
         //Cargo el contrato a partir de la direccion y la firma
@@ -58,7 +51,7 @@ public class MainTokenRepository {
     @NotNull
     private  String getContractAddress() throws NullPointerException {
 
-        String contractAddress = environment.getProperty("contract.address","");
+        String contractAddress = environment.getProperty("contract.main.address","");
 
         if (contractAddress.isEmpty()) {
             MainTokenRepository.log.error("Contract address is not valid");
@@ -88,8 +81,8 @@ public class MainTokenRepository {
     }
 
     @NotNull
-    private StakingToken loadTokenContract(String contractAddress, Credentials credentials) {
-        return StakingToken.load(
+    private MainToken loadTokenContract(String contractAddress, Credentials credentials) {
+        return MainToken.load(
                 contractAddress,
                 ethereumClient,
                 new FastRawTransactionManager(ethereumClient, credentials, new PollingTransactionReceiptProcessor(ethereumClient, 100, 400)),
@@ -98,4 +91,36 @@ public class MainTokenRepository {
 
     }
 
+
+
+    public TransactionReceipt stakeTokens(double value) throws NullPointerException, ResponseStatusException, Exception{
+        String contractAddress = getContractAddress();
+        Credentials credentials = getUserCredentials();
+        //StakingToken token = loadTokenContract(contractAddress, credentials);
+        MainToken token = loadTokenContract(contractAddress, credentials);
+
+        TransactionReceipt tokenName = token.stakeTokens(BigInteger.valueOf((long) value)).send();
+        log.info("The token name is: " + tokenName);
+        return tokenName;
+    }
+
+    @NotNull
+    private Credentials getUserCredentials() throws ResponseStatusException {
+
+        String password = environment.getProperty("credentials.user.account.password", "");
+        String keyPath = environment.getProperty("credentials.user.account.path", "");
+        Credentials credentials;
+        try {
+            credentials = WalletUtils.loadCredentials(password, keyPath);
+
+        } catch (IOException e) {
+            MainTokenRepository.log.error("Can't load path {}", keyPath);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (CipherException e) {
+            MainTokenRepository.log.error("Can't decode key", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return credentials;
+    }
 }
