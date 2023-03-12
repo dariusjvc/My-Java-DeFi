@@ -21,13 +21,13 @@ public class SmartContractController {
         this.smartContractService = smartContractService;
     }
 
-    @GetMapping("/StakingToken/balance")
+    @GetMapping("/stakingToken/balance")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public String getSTTotal() throws Exception {
 
         return smartContractService.getTotalStakingTokensOwner();
     }
-    @GetMapping("/RewardToken/balance")
+    @GetMapping("/rewardToken/balance")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public String getRTTotal() throws Exception {
 

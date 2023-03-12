@@ -44,14 +44,14 @@ public class UserController {
         return userService.unstakeTokens();
     }
 
-    @GetMapping("/StakingToken/balance")
+    @GetMapping("/stakingToken/balance")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public String getTotalStakingTokensUser() throws Exception {
 
         return userService.getTotalStakingTokensUser();
     }
 
-    @GetMapping("/RewardToken/balance")
+    @GetMapping("/rewardToken/balance")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public String getTotalRewardTokensUser() throws Exception {
 
