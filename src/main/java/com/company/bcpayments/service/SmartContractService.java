@@ -24,6 +24,9 @@ public class SmartContractService {
     }
 
 
+    public String getSTEvents() throws Exception {
+        return StakingToken.getStakingEvents().toString();
+    }
     public String getTotalRewardTokensOwner() throws Exception {
         return RewardToken.getTotalRewardTokensOwner();
     }

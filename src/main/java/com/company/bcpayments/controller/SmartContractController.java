@@ -27,6 +27,13 @@ public class SmartContractController {
 
         return smartContractService.getTotalStakingTokensOwner();
     }
+
+    @GetMapping("/stakingToken/events")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public String getSTEvents() throws Exception {
+
+        return smartContractService.getSTEvents();
+    }
     @GetMapping("/rewardToken/balance")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public String getRTTotal() throws Exception {
