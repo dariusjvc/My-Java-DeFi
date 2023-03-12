@@ -114,7 +114,7 @@ public class MainTokenRepository {
     }
     public TransactionReceipt rewardUser() throws NullPointerException, ResponseStatusException, Exception{
         String contractAddress = getContractAddress();
-        Credentials credentials = getUserCredentials();
+        Credentials credentials = getOwnerCredentials();
         MainToken token = loadTokenContract(contractAddress, credentials);
         TransactionReceipt result = token.issueTokens().send();
         return result;
