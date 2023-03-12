@@ -30,4 +30,11 @@ public class UserService {
     public TransactionReceipt stakeTokens(double value) throws Exception {
         return mainTokenRepository.stakeTokens(  value);
     }
+
+
+
+    public TransactionReceipt unstakeTokens() throws Exception {
+        return mainTokenRepository.unstakeTokens( );
+    }
+
 }

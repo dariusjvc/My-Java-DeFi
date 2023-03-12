@@ -103,6 +103,16 @@ public class MainTokenRepository {
         return result;
     }
 
+
+
+    public TransactionReceipt unstakeTokens() throws NullPointerException, ResponseStatusException, Exception{
+        String contractAddress = getContractAddress();
+        Credentials credentials = getUserCredentials();
+        MainToken token = loadTokenContract(contractAddress, credentials);
+        TransactionReceipt result = token.unstakeTokens().send();
+        return result;
+    }
+
     @NotNull
     private Credentials getUserCredentials() throws ResponseStatusException {
 

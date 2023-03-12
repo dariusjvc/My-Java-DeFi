@@ -36,4 +36,11 @@ public class UserController {
 
         return userService.stakeTokens( value);
     }
+
+    @PostMapping("/unstakeTokens")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public TransactionReceipt unstakeTokens() throws Exception {
+
+        return userService.unstakeTokens();
+    }
 }
