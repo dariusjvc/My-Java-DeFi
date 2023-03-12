@@ -1,5 +1,6 @@
 package com.company.bcpayments.service;
 
+import com.company.bcpayments.repository.RewardTokenRepository;
 import com.company.bcpayments.repository.StakingTokenRepository;
 import com.company.bcpayments.repository.MainTokenRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -13,10 +14,12 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 public class UserService {
 
     private final StakingTokenRepository StakingToken;
+    private final RewardTokenRepository rewardToken;
     private final MainTokenRepository mainTokenRepository;
 
-    public UserService(StakingTokenRepository stakingToken, MainTokenRepository mainTokenRepository) {
+    public UserService(StakingTokenRepository stakingToken, RewardTokenRepository rewardToken, MainTokenRepository mainTokenRepository) {
         StakingToken = stakingToken;
+        this.rewardToken = rewardToken;
         this.mainTokenRepository = mainTokenRepository;
     }
 
@@ -43,4 +46,8 @@ public class UserService {
         return StakingToken.getTotalStakingTokensUser( );
     }
 
+
+    public String getTotalRewardTokensUser() throws Exception {
+        return rewardToken.getTotalRewardTokensUser( );
+    }
 }

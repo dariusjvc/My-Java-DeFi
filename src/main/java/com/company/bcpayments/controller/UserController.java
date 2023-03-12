@@ -50,4 +50,11 @@ public class UserController {
 
         return userService.getTotalStakingTokensUser();
     }
+
+    @GetMapping("/RewardToken/balance")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public String getTotalRewardTokensUser() throws Exception {
+
+        return userService.getTotalRewardTokensUser();
+    }
 }

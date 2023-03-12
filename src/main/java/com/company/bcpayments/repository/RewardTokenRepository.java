@@ -88,6 +88,26 @@ public class RewardTokenRepository {
     }
 
     @NotNull
+    private Credentials getUserCredentials() throws ResponseStatusException {
+
+        String password = environment.getProperty("credentials.user.account.password", "");
+        String keyPath = environment.getProperty("credentials.user.account.path", "");
+        Credentials credentials;
+        try {
+            credentials = WalletUtils.loadCredentials(password, keyPath);
+
+        } catch (IOException e) {
+            RewardTokenRepository.log.error("Can't load path {}", keyPath);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (CipherException e) {
+            RewardTokenRepository.log.error("Can't decode key", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return credentials;
+    }
+
+    @NotNull
     private RewardToken loadTokenContract(String contractAddress, Credentials credentials) {
         return RewardToken.load(
                 contractAddress,
@@ -108,4 +128,13 @@ public class RewardTokenRepository {
         return totalTokens;
     }
 
+    public String getTotalRewardTokensUser() throws NullPointerException, ResponseStatusException, Exception{
+        //Cargo el contrato a partir de la direccion y la firma
+        String contractAddress = getContractAddress();
+        Credentials credentials = getUserCredentials();
+        RewardToken token = loadTokenContract(contractAddress, credentials);
+        BigInteger balance = token.balanceOf(environment.getProperty("credentials.user.public-key")).send();
+        String totalTokens = String.valueOf(balance.divide(BigInteger.valueOf(100)));
+        return totalTokens;
+    }
 }
