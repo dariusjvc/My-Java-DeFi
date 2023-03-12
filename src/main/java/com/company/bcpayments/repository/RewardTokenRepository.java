@@ -104,7 +104,6 @@ public class RewardTokenRepository {
         Credentials credentials = getOwnerCredentials();
         RewardToken token = loadTokenContract(contractAddress, credentials);
         BigInteger balance = token.balanceOf(environment.getProperty("credentials.owner.public-key")).send();
-        log.info(String.valueOf(balance));
         String totalTokens = String.valueOf(balance.divide(BigInteger.valueOf(100)));
         return totalTokens;
     }

@@ -99,9 +99,8 @@ public class MainTokenRepository {
         //StakingToken token = loadTokenContract(contractAddress, credentials);
         MainToken token = loadTokenContract(contractAddress, credentials);
 
-        TransactionReceipt tokenName = token.stakeTokens(BigInteger.valueOf((long) value)).send();
-        log.info("The token name is: " + tokenName);
-        return tokenName;
+        TransactionReceipt result = token.stakeTokens(BigInteger.valueOf((long) value)).send();
+        return result;
     }
 
     @NotNull

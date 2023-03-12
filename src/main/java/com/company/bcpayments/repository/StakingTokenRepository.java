@@ -52,7 +52,6 @@ public class StakingTokenRepository {
         Credentials credentials = getOwnerCredentials();
         StakingToken token = loadTokenContract(contractAddress, credentials);
         BigInteger balance = token.balanceOf(environment.getProperty("credentials.owner.public-key")).send();
-        log.info(String.valueOf(balance));
         String totalTokens = String.valueOf(balance.divide(BigInteger.valueOf(100)));
         return totalTokens;
     }
@@ -124,24 +123,17 @@ public class StakingTokenRepository {
     public TransactionReceipt transferTokens(double value) throws NullPointerException, ResponseStatusException, Exception{
         String contractAddress = getContractAddress();
         Credentials credentials = getOwnerCredentials();
-        //StakingToken token = loadTokenContract(contractAddress, credentials);
         StakingToken token = loadTokenContract(contractAddress, credentials);
-
-        TransactionReceipt tokenName = token.transfer(environment.getProperty("credentials.user.public-key"), BigInteger.valueOf((long) value)).send();
-        log.info("The token name is: " + tokenName);
-        return tokenName;
+        TransactionReceipt result = token.transfer(environment.getProperty("credentials.user.public-key"), BigInteger.valueOf((long) value)).send();
+        return result;
     }
-
 
     public TransactionReceipt approveStaking(double value) throws NullPointerException, ResponseStatusException, Exception{
         String contractAddress = getContractAddress();
         Credentials credentials = getUserCredentials();
-        //StakingToken token = loadTokenContract(contractAddress, credentials);
         StakingToken token = loadTokenContract(contractAddress, credentials);
-
-        TransactionReceipt tokenName = token.approve(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) value)).send();
-        log.info("The token name is: " + tokenName);
-        return tokenName;
+        TransactionReceipt result = token.approve(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) value)).send();
+        return result;
     }
 
 
