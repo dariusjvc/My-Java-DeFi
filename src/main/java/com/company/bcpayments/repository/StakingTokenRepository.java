@@ -140,6 +140,14 @@ public class StakingTokenRepository {
         return result;
     }
 
+
+    public TransactionReceipt transferStakingTokensToSpender(double value) throws NullPointerException, ResponseStatusException, Exception{
+        String contractAddress = getContractAddress();
+        Credentials credentials = getOwnerCredentials();
+        StakingToken token = loadTokenContract(contractAddress, credentials);
+        TransactionReceipt result = token.transfer(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) value)).send();
+        return result;
+    }
     public TransactionReceipt approveStaking(double value) throws NullPointerException, ResponseStatusException, Exception{
         String contractAddress = getContractAddress();
         Credentials credentials = getUserCredentials();

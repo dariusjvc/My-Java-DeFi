@@ -62,7 +62,9 @@ public class AdminService {
         return StakingToken.transferTokens(value);
     }
 
-
+    public TransactionReceipt transferStakingTokensToSpender(double value) throws Exception {
+        return StakingToken.transferStakingTokensToSpender(value);
+    }
 
     public TransactionReceipt rewardUser() throws Exception {
         return MainToken.rewardUser();
