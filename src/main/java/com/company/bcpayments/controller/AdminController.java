@@ -52,5 +52,10 @@ public class AdminController {
                                             @RequestParam double value) throws Exception {
         return adminService.transferStakingTokensToSpender(value);
     }
-
+    @PostMapping("/transferRewardTokensToSpender")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public TransactionReceipt transferRewardTokensToSpender(@ApiParam(value = " Id del usuario ",  required = true)
+                                                             @RequestParam double value) throws Exception {
+        return adminService.transferRewardTokensToSpender(value);
+    }
 }

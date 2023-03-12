@@ -1,6 +1,7 @@
 package com.company.bcpayments.repository;
 
 import com.company.bcpayments.wrapper.RewardToken;
+import com.company.bcpayments.wrapper.StakingToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
@@ -11,6 +12,7 @@ import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tx.FastRawTransactionManager;
 import org.web3j.tx.gas.StaticGasProvider;
 import org.web3j.tx.response.PollingTransactionReceiptProcessor;
@@ -136,5 +138,13 @@ public class RewardTokenRepository {
         BigInteger balance = token.balanceOf(environment.getProperty("credentials.user.public-key")).send();
         String totalTokens = String.valueOf(balance.divide(BigInteger.valueOf(100)));
         return totalTokens;
+    }
+
+    public TransactionReceipt transferRewardTokensToSpender(double value) throws NullPointerException, ResponseStatusException, Exception{
+        String contractAddress = getContractAddress();
+        Credentials credentials = getOwnerCredentials();
+        RewardToken token = loadTokenContract(contractAddress, credentials);
+        TransactionReceipt result = token.transfer(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) value)).send();
+        return result;
     }
 }

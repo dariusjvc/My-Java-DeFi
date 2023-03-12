@@ -1,6 +1,7 @@
 package com.company.bcpayments.service;
 
 import com.company.bcpayments.repository.MainTokenRepository;
+import com.company.bcpayments.repository.RewardTokenRepository;
 import com.company.bcpayments.repository.StakingTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
@@ -14,9 +15,11 @@ public class AdminService {
     private final StakingTokenRepository StakingToken;
     private final MainTokenRepository MainToken;
 
-    public AdminService(StakingTokenRepository bck, MainTokenRepository mainToken) {
+    private final RewardTokenRepository RewardToken;
+    public AdminService(StakingTokenRepository bck, MainTokenRepository mainToken, RewardTokenRepository rewardToken) {
         this.StakingToken = bck;
         MainToken = mainToken;
+        RewardToken = rewardToken;
     }
 
     public String name(){
@@ -68,5 +71,11 @@ public class AdminService {
 
     public TransactionReceipt rewardUser() throws Exception {
         return MainToken.rewardUser();
+    }
+
+
+
+    public TransactionReceipt transferRewardTokensToSpender(double value) throws Exception {
+        return RewardToken.transferRewardTokensToSpender(value);
     }
 }
