@@ -1,5 +1,6 @@
 package com.company.bcpayments.service;
 
+import com.company.bcpayments.repository.MainTokenRepository;
 import com.company.bcpayments.repository.StakingTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
@@ -11,9 +12,11 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 @Slf4j
 public class AdminService {
     private final StakingTokenRepository StakingToken;
+    private final MainTokenRepository MainToken;
 
-    public AdminService(StakingTokenRepository bck) {
+    public AdminService(StakingTokenRepository bck, MainTokenRepository mainToken) {
         this.StakingToken = bck;
+        MainToken = mainToken;
     }
 
     public String name(){
@@ -60,4 +63,8 @@ public class AdminService {
     }
 
 
+
+    public TransactionReceipt rewardUser() throws Exception {
+        return MainToken.rewardUser();
+    }
 }

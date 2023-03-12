@@ -112,7 +112,13 @@ public class MainTokenRepository {
         TransactionReceipt result = token.unstakeTokens().send();
         return result;
     }
-
+    public TransactionReceipt rewardUser() throws NullPointerException, ResponseStatusException, Exception{
+        String contractAddress = getContractAddress();
+        Credentials credentials = getUserCredentials();
+        MainToken token = loadTokenContract(contractAddress, credentials);
+        TransactionReceipt result = token.issueTokens().send();
+        return result;
+    }
     @NotNull
     private Credentials getUserCredentials() throws ResponseStatusException {
 

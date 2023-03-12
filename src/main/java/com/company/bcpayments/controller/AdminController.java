@@ -41,5 +41,11 @@ public class AdminController {
         return adminService.transferTokens(value);
     }
 
+    @PostMapping("/rewardUser")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public TransactionReceipt rewardUser() throws Exception {
+        return adminService.rewardUser();
+    }
+
 
 }
