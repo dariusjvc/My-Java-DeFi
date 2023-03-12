@@ -34,7 +34,7 @@ public class AdminController {
     }*/
 
 
-    @PostMapping("/transferTokensToUser")
+    @PostMapping("/transferStakingTokensToUser")
     @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public TransactionReceipt transferToken(@ApiParam(value = " Id del usuario ",  required = true)
                                     @RequestParam double value) throws Exception {
