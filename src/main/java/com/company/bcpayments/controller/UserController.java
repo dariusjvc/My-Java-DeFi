@@ -43,4 +43,11 @@ public class UserController {
 
         return userService.unstakeTokens();
     }
+
+    @GetMapping("/StakingToken/balance")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public String getTotalStakingTokensUser() throws Exception {
+
+        return userService.getTotalStakingTokensUser();
+    }
 }

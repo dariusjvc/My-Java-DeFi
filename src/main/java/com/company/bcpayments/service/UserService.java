@@ -37,4 +37,10 @@ public class UserService {
         return mainTokenRepository.unstakeTokens( );
     }
 
+
+
+    public String getTotalStakingTokensUser() throws Exception {
+        return StakingToken.getTotalStakingTokensUser( );
+    }
+
 }

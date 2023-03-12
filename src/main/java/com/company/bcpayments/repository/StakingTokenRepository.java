@@ -56,6 +56,18 @@ public class StakingTokenRepository {
         return totalTokens;
     }
 
+
+
+
+    public String getTotalStakingTokensUser() throws NullPointerException, ResponseStatusException, Exception{
+        //Cargo el contrato a partir de la direccion y la firma
+        String contractAddress = getContractAddress();
+        Credentials credentials = getUserCredentials();
+        StakingToken token = loadTokenContract(contractAddress, credentials);
+        BigInteger balance = token.balanceOf(environment.getProperty("credentials.user.public-key")).send();
+        String totalTokens = String.valueOf(balance.divide(BigInteger.valueOf(100)));
+        return totalTokens;
+    }
     @NotNull
     private  String getContractAddress() throws NullPointerException {
 
