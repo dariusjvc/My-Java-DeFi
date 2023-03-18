@@ -26,7 +26,4 @@ web3j-1.4.1
 # API url :
 http://localhost:8080/ethereum-api/swagger-ui/index.html#/
 
-# Status:
-In progress
-
 
