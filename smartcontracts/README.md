@@ -6,5 +6,5 @@ Try running some of the following tasks:
 
 ```shell
 npx hardhat compile
-npx hardhat run scripts/deployDeFiContracts.js
+npx hardhat run scripts/deployDeFiContracts.js --network miRed
 ```

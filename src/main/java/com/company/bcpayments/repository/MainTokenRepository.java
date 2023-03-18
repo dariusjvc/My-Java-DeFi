@@ -99,7 +99,7 @@ public class MainTokenRepository {
         //StakingToken token = loadTokenContract(contractAddress, credentials);
         MainToken token = loadTokenContract(contractAddress, credentials);
 
-        TransactionReceipt result = token.stakeTokens(BigInteger.valueOf((long) value)).send();
+        TransactionReceipt result = token.stakeTokens(BigInteger.valueOf((long) (value * 100))).send();
         return result;
     }
 

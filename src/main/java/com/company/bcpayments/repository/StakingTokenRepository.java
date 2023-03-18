@@ -154,7 +154,7 @@ public class StakingTokenRepository {
         String contractAddress = getContractAddress();
         Credentials credentials = getOwnerCredentials();
         StakingToken token = loadTokenContract(contractAddress, credentials);
-        TransactionReceipt result = token.transfer(environment.getProperty("credentials.user.public-key"), BigInteger.valueOf((long) value)).send();
+        TransactionReceipt result = token.transfer(environment.getProperty("credentials.user.public-key"), BigInteger.valueOf((long) (value * Math.pow(10, token.getDecimals().send().doubleValue())))).send();
         return result;
     }
 
@@ -163,14 +163,14 @@ public class StakingTokenRepository {
         String contractAddress = getContractAddress();
         Credentials credentials = getOwnerCredentials();
         StakingToken token = loadTokenContract(contractAddress, credentials);
-        TransactionReceipt result = token.transfer(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) value)).send();
+        TransactionReceipt result = token.transfer(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) (value * Math.pow(10, token.getDecimals().send().doubleValue())))).send();
         return result;
     }
     public TransactionReceipt approveStaking(double value) throws NullPointerException, ResponseStatusException, Exception{
         String contractAddress = getContractAddress();
         Credentials credentials = getUserCredentials();
         StakingToken token = loadTokenContract(contractAddress, credentials);
-        TransactionReceipt result = token.approve(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) value)).send();
+        TransactionReceipt result = token.approve(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) (value * Math.pow(10, token.getDecimals().send().doubleValue())))).send();
         return result;
     }
 

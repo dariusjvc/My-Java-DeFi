@@ -6,7 +6,7 @@ contract RewardToken  {
     string public name = "RewardToken";
     string public symbol= "RT";
     uint256 public totalSupply = 100000;
-    uint8 decimals = 2;
+    uint8 public decimals=2;
 
     event Transfer(
     address indexed _from,
@@ -56,7 +56,7 @@ contract RewardToken  {
         return true;
     }
 
-    function getTotalMinted() public view returns (uint256) {
-        return totalSupply;
+    function getDecimals() public view returns (uint8) {
+        return decimals;
     }
 }

@@ -140,11 +140,11 @@ public class RewardTokenRepository {
         return totalTokens;
     }
 
-    public TransactionReceipt transferRewardTokensToSpender(double value) throws NullPointerException, ResponseStatusException, Exception{
+    public TransactionReceipt transferRewardTokensToSpender(double value) throws ResponseStatusException, Exception{
         String contractAddress = getContractAddress();
         Credentials credentials = getOwnerCredentials();
         RewardToken token = loadTokenContract(contractAddress, credentials);
-        TransactionReceipt result = token.transfer(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) value)).send();
+        TransactionReceipt result = token.transfer(environment.getProperty("contract.main.address"), BigInteger.valueOf((long) (value * Math.pow(10, token.getDecimals().send().doubleValue())))).send();
         return result;
     }
 }

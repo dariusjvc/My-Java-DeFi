@@ -6,7 +6,7 @@ contract StakingToken  {
     string public name = "StakingToken";
     string public symbol= "ST";
     uint256 public totalSupply = 100000;
-    uint8 decimals = 2;
+    uint8 public decimals= 2;
 
     event Transfer(
     address indexed _from,
@@ -54,6 +54,10 @@ contract StakingToken  {
         allowance[_from][msg.sender]-= _value;
         emit Transfer(_from, _to, _value);
         return true;
+    }
+
+    function getDecimals() public view returns (uint8) {
+        return decimals;
     }
 
 }
