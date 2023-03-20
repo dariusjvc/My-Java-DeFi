@@ -19,7 +19,7 @@ web3j-1.4.1
 ```
 
 # How to deploy:
-1. git clone https://github.com/dariusjvc/MyDeFi.
+1. git clone https://github.com/dariusjvc/My-DeFi.git.
 2. Deploy smart contracts
 3. Open with Intellij IDEA and play
 
