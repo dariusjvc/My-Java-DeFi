@@ -1,4 +1,4 @@
-# Blockchain API created to stake tokens in a Private Blockchain Network
+# Rest API created to stake tokens in a private blockchain network
 
 # Description:
 
