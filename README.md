@@ -11,13 +11,6 @@ MainToken, RewardToken and StakingToken
 3. The user will stake
 4. The admin will issue some RewardToken to the user, which will be the reward for staking
 
-# Requirements:
-
-```shell
-Java 11
-web3j-1.4.1
-```
-
 # How to deploy:
 1. git clone https://github.com/dariusjvc/My-DeFi.git.
 2. Deploy smart contracts
